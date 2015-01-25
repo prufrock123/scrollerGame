@@ -21,39 +21,69 @@ function app(){
 
         };
 
-        var hero   = id('guy');
         var ground = id('ground');
         var groundPosition = {
             x:0,
             y:0
-        }//[0 , 0];
-        var heroPosition   = {
-            x:20,
-            y:ground.offsetHeight
-        }//[20 , ground.offsetHeight];   // I want guy to start above the ground
+        }
 
+        var hero   = {
+            id :id('guy') ,
+            x  :20 ,
+            y  :ground.offsetHeight ,
+            velocity : 20
+        }
+        
         var plotObject = function(obj , coordinates) {
             // we relocated our origin point from top left to bottom left to be congruent with a classical schema
             // we also relocated our origin point of placed objects to the bottom left.
             obj.style.left = coordinates.x  + 'px';
             obj.style.top  = document.querySelector('body').offsetHeight - coordinates.y - obj.offsetHeight + 'px';
         };
-        plotObject(ground , groundPosition ); 
-        plotObject(hero   , heroPosition );
+        plotObject(ground  , groundPosition );
+        plotObject(hero.id , hero );
 
         document.onkeydown=function(e){
-            var evtobj = window.event? event : e
             
+            var evtobj = window.event? event : e
+
             if(evtobj.keyCode==37){
-                heroPosition.x += -1;
+                hero.x += -5;
             }
             
             if(evtobj.keyCode==39){
-                heroPosition.x += 1;
+                hero.x += 5;
             }
-        plotObject(hero   , heroPosition );
+
+            plotObject(hero.id , hero );
             
            
+        }
+
+        document.onkeyup = function() {
+            
+            var evtobj = window.event? event : e
+
+            if(evtobj.keyCode==38 && hero.velocity===20) {
+
+                var gravity  = -1;
+
+                var jump = setInterval(function(){
+                    
+                    hero.y += hero.velocity;
+                    
+                    plotObject(hero.id , hero );
+                    
+                    hero.velocity += gravity;
+
+                    if (hero.velocity<=-21){
+                        hero.velocity = 20;
+                        clearInterval(jump);
+                    }
+
+                } , 20);
+            }
+
         }
     })
 

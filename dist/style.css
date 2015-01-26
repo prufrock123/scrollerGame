@@ -850,27 +850,37 @@ img {
   max-width: 100; }
 
 body {
+  width: 100%;
   -webkit-transition: opacity .25s ease;
           transition: opacity .25s ease; }
 
+html {
+  width: 300%; }
+
 html, body {
-  height: 100%;
-  border: 8px solid black; }
+  height: 100%; }
+
+.area {
+  border: 0px solid black;
+  width: 100%; }
 
 div, span {
   display: inline-block;
   position: absolute;
+  background-color: red;
   border: 3px solid black; }
 
 #guy {
-  width: 100px;
+  width: 25px;
   height: 100px;
-  background-color: #44ffad;
-  -webkit-border-radius: 50%;
-          border-radius: 50%; }
+  background-color: #44ffad; }
 
 #ground {
   background-color: #992222;
-  width: 100%;
+  width: 300%;
   height: 20px; }
+
+.circle {
+  -webkit-border-radius: 50%;
+          border-radius: 50%; }
 
